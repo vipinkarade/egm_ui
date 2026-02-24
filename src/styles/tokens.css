@@ -1,0 +1,80 @@
+:root {
+  --font-family-base: 'Inter', 'Segoe UI Variable Text', 'Segoe UI', 'Roboto', sans-serif;
+  --font-family-display: 'Inter', 'Segoe UI Variable Text', 'Segoe UI', sans-serif;
+
+  --color-bg: #edf0f7;
+  --color-bg-accent: #d5dbe8;
+  --color-surface: #f7f8fd;
+  --color-surface-muted: #edf1fb;
+  --color-surface-soft: #ffffff;
+  --color-text: #131c30;
+  --color-text-muted: #6a7287;
+  --color-brand-e: #10161f;
+  --color-brand-g: #3ab55f;
+  --color-border: #d7dceb;
+  --color-shadow: rgba(22, 31, 53, 0.15);
+
+  --color-success: #4aa55a;
+  --color-danger: #d95050;
+  --color-warning: #db8a21;
+  --color-info: #3976de;
+  --color-neutral: #7885a2;
+
+  --gradient-start: linear-gradient(180deg, #9bd06a 0%, #5da54e 100%);
+  --gradient-stop: linear-gradient(180deg, #f27d7d 0%, #d34848 100%);
+  --gradient-restart: linear-gradient(180deg, #f0b34f 0%, #d67a16 100%);
+  --gradient-download: linear-gradient(180deg, #5e99ef 0%, #2d6dd0 100%);
+  --gradient-banner: linear-gradient(120deg, #4fb649 0%, #1f9141 100%);
+
+  --action-start-from: #43a047;
+  --action-start-to: #2e7d32;
+  --action-start-border: #2e7d32;
+  --action-stop-from: #ef5350;
+  --action-stop-to: #d84343;
+  --action-stop-border: #d84343;
+  --action-restart-from: #5c6bc0;
+  --action-restart-to: #3f51b5;
+  --action-restart-border: #3f51b5;
+
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --radius-panel: 16px;
+  --shadow-card: 0 10px 20px -14px var(--color-shadow);
+  --shadow-soft: 0 16px 32px -24px var(--color-shadow);
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #0f1628;
+  --color-bg-accent: #1a253b;
+  --color-surface: #182237;
+  --color-surface-muted: #212f4a;
+  --color-surface-soft: #1f2b43;
+  --color-text: #f3f6ff;
+  --color-text-muted: #a6b1c9;
+  --color-brand-e: #f6f9ff;
+  --color-brand-g: #4dd574;
+  --color-border: #2b3a58;
+  --color-shadow: rgba(3, 8, 19, 0.45);
+
+  --color-success: #5bc768;
+  --color-danger: #f06e6e;
+  --color-warning: #f2a342;
+  --color-info: #71a7ff;
+  --color-neutral: #9dadcf;
+
+  --gradient-start: linear-gradient(180deg, #60ba5c 0%, #337d38 100%);
+  --gradient-stop: linear-gradient(180deg, #ef6a6a 0%, #b53333 100%);
+  --gradient-restart: linear-gradient(180deg, #f5b15a 0%, #b6650f 100%);
+  --gradient-download: linear-gradient(180deg, #4d8df3 0%, #2458af 100%);
+  --gradient-banner: linear-gradient(120deg, #5ac05a 0%, #22854d 100%);
+
+  --action-start-from: #81c784;
+  --action-start-to: #66bb6a;
+  --action-start-border: #4caf50;
+  --action-stop-from: #ff8a80;
+  --action-stop-to: #ff5252;
+  --action-stop-border: #ef5350;
+  --action-restart-from: #9fa8da;
+  --action-restart-to: #7986cb;
+  --action-restart-border: #7986cb;
+}

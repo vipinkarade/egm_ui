@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 12% -6%, rgba(130, 170, 227, 0.25), transparent 34%),
+    radial-gradient(circle at 84% 0%, rgba(125, 205, 145, 0.22), transparent 42%),
+    linear-gradient(180deg, var(--color-bg), var(--color-bg-accent));
+  background-attachment: fixed;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 20px 26px 28px;
+}
