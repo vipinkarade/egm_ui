@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { CopyButton } from './CopyButton'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { GlassWalletCard } from '@/components/uitripled/glass-wallet-card-shadcnui'
 
 export function StatusCard({
   title,
@@ -32,14 +33,15 @@ export function StatusCard({
   }, [hasDropdown, open])
 
   return (
-    <article
-      className={`status-card ${
-        hasDropdown && open ? 'status-card--dropdown-open' : ''
-      }`}
-    >
-      <p className="status-card__title">{title}</p>
-      <div className="status-card__value-row">
-        {hasDropdown ? (
+    <GlassWalletCard
+      className={hasDropdown && open ? 'status-card--dropdown-open' : ''}
+      title={title}
+      value={value}
+      subtitle={subtitle}
+      tone={tone}
+      statusDot={statusDot}
+      controls={
+        hasDropdown ? (
           <div className="status-card__dropdown" ref={dropdownRef}>
             <button
               type="button"
@@ -76,15 +78,9 @@ export function StatusCard({
               </ul>
             ) : null}
           </div>
-        ) : (
-          <p className={`status-card__value status-card__value--${tone}`}>
-            {statusDot ? <span className="status-card__dot" aria-hidden="true" /> : null}
-            {value}
-          </p>
-        )}
-        {copyValue ? <CopyButton text={copyValue} label={title} /> : null}
-      </div>
-      {subtitle ? <p className="status-card__subtitle">{subtitle}</p> : null}
-    </article>
+        ) : null
+      }
+      copyAction={copyValue ? <CopyButton text={copyValue} label={title} /> : null}
+    />
   )
 }

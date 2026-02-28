@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getInstances } from './api/dashboardApi'
 import { ActionButton } from './components/ActionButton'
 import { AppInformationPanel } from './components/AppInformationPanel'
@@ -7,6 +7,7 @@ import { OperationBanner } from './components/OperationBanner'
 import { ServerMonitorPanel } from './components/ServerMonitorPanel'
 import { StatusCard } from './components/StatusCard'
 import { TabBar } from './components/TabBar'
+import { LoadingScreen } from './components/LoadingScreen'
 import { useLogDownload } from './hooks/useLogDownload'
 import { useOperationController } from './hooks/useOperationController'
 import { useOverviewData } from './hooks/useOverviewData'
@@ -43,8 +44,14 @@ export function OverviewPage({ theme, onToggleTheme }) {
   const [instanceError, setInstanceError] = useState(null)
   const [isLoadingInstances, setIsLoadingInstances] = useState(true)
   const [selectedInstanceId, setSelectedInstanceId] = useState('')
+  const [isInstanceSwitching, setIsInstanceSwitching] = useState(false)
+  const [isLoadingHoldActive, setIsLoadingHoldActive] = useState(false)
+  const [isRevealing, setIsRevealing] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
   const [tenantSelectionByInstance, setTenantSelectionByInstance] = useState({})
+  const loadingHoldTimerRef = useRef(null)
+  const revealTimerRef = useRef(null)
+  const previousShowLoadingRef = useRef(true)
 
   const loadInstances = useCallback(async () => {
     setIsLoadingInstances(true)
@@ -68,6 +75,18 @@ export function OverviewPage({ theme, onToggleTheme }) {
     loadInstances()
   }, [loadInstances])
 
+  const handleInstanceChange = useCallback(
+    (nextInstanceId) => {
+      if (!nextInstanceId || nextInstanceId === selectedInstanceId) {
+        return
+      }
+
+      setIsInstanceSwitching(true)
+      setSelectedInstanceId(nextInstanceId)
+    },
+    [selectedInstanceId],
+  )
+
   const {
     data: overview,
     error: overviewError,
@@ -77,6 +96,25 @@ export function OverviewPage({ theme, onToggleTheme }) {
 
   const scopedOverview =
     overview?.instance?.id === selectedInstanceId ? overview : null
+
+  useEffect(() => {
+    if (!isInstanceSwitching) {
+      return
+    }
+
+    if (!isLoadingOverview && overviewError) {
+      setIsInstanceSwitching(false)
+      return
+    }
+
+    if (!isLoadingOverview) {
+      setIsInstanceSwitching(false)
+    }
+  }, [
+    isInstanceSwitching,
+    isLoadingOverview,
+    overviewError,
+  ])
 
   const {
     operation,
@@ -181,6 +219,57 @@ export function OverviewPage({ theme, onToggleTheme }) {
     [operation, logJob],
   )
 
+  const isBaseLoading =
+    isLoadingInstances || isInstanceSwitching || (Boolean(selectedInstanceId) && isLoadingOverview)
+
+  useEffect(() => {
+    if (!isBaseLoading) {
+      return
+    }
+
+    setIsLoadingHoldActive(true)
+
+    if (loadingHoldTimerRef.current) {
+      window.clearTimeout(loadingHoldTimerRef.current)
+    }
+
+    loadingHoldTimerRef.current = window.setTimeout(() => {
+      setIsLoadingHoldActive(false)
+      loadingHoldTimerRef.current = null
+    }, 2000)
+  }, [isBaseLoading])
+
+  useEffect(() => {
+    return () => {
+      if (loadingHoldTimerRef.current) {
+        window.clearTimeout(loadingHoldTimerRef.current)
+      }
+
+      if (revealTimerRef.current) {
+        window.clearTimeout(revealTimerRef.current)
+      }
+    }
+  }, [])
+
+  const showLoadingPage = isBaseLoading || isLoadingHoldActive
+
+  useEffect(() => {
+    if (previousShowLoadingRef.current && !showLoadingPage) {
+      setIsRevealing(true)
+
+      if (revealTimerRef.current) {
+        window.clearTimeout(revealTimerRef.current)
+      }
+
+      revealTimerRef.current = window.setTimeout(() => {
+        setIsRevealing(false)
+        revealTimerRef.current = null
+      }, 700)
+    }
+
+    previousShowLoadingRef.current = showLoadingPage
+  }, [showLoadingPage])
+
   const isBusy = isOperationExecuting || isSubmittingAction || isLogGenerationRunning
 
   const actionAvailability = scopedOverview?.actionAvailability ?? {
@@ -198,14 +287,14 @@ export function OverviewPage({ theme, onToggleTheme }) {
     null
 
   return (
-    <main className="dashboard-root">
+    <main className={`dashboard-root${isRevealing ? ' is-revealing' : ''}`}>
       <Header
         instances={instances}
         selectedInstanceId={selectedInstanceId}
-        onInstanceChange={setSelectedInstanceId}
+        onInstanceChange={handleInstanceChange}
         theme={theme}
         onToggleTheme={onToggleTheme}
-        disabled={isLoadingInstances}
+        disabled={isLoadingInstances || isInstanceSwitching}
       />
 
       {errorMessage ? (
@@ -307,6 +396,8 @@ export function OverviewPage({ theme, onToggleTheme }) {
           </section>
         </section>
       ) : null}
+
+      {showLoadingPage ? <LoadingScreen /> : null}
     </main>
   )
 }

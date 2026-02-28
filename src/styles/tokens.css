@@ -27,14 +27,34 @@
   --gradient-banner: linear-gradient(120deg, #4fb649 0%, #1f9141 100%);
 
   --action-start-from: #43a047;
-  --action-start-to: #2e7d32;
-  --action-start-border: #2e7d32;
-  --action-stop-from: #ef5350;
-  --action-stop-to: #d84343;
-  --action-stop-border: #d84343;
-  --action-restart-from: #5c6bc0;
-  --action-restart-to: #3f51b5;
-  --action-restart-border: #3f51b5;
+  --action-start-to: #2c7a30;
+  --action-start-border: #2b6f2f;
+  --action-start-highlight: #70d079;
+  --action-start-shadow: rgba(38, 122, 54, 0.52);
+
+  --action-stop-from: #e85f5a;
+  --action-stop-to: #c33f3c;
+  --action-stop-border: #b33936;
+  --action-stop-highlight: #ff9d97;
+  --action-stop-shadow: rgba(153, 45, 42, 0.52);
+
+  --action-restart-from: #6f7ee0;
+  --action-restart-to: #4f5fc8;
+  --action-restart-border: #4556ba;
+  --action-restart-highlight: #a4b1ff;
+  --action-restart-shadow: rgba(62, 78, 171, 0.5);
+
+  --action-download-from: #4d8df0;
+  --action-download-to: #2f67bf;
+  --action-download-border: #2d5cad;
+  --action-download-highlight: #8ec0ff;
+  --action-download-shadow: rgba(39, 80, 161, 0.5);
+
+  --action-neutral-from: #7f8eae;
+  --action-neutral-to: #667898;
+  --action-neutral-border: #5f7396;
+  --action-neutral-highlight: #a7b7d6;
+  --action-neutral-shadow: rgba(63, 82, 117, 0.45);
 
   --radius-card: 14px;
   --radius-pill: 999px;
@@ -69,12 +89,32 @@
   --gradient-banner: linear-gradient(120deg, #5ac05a 0%, #22854d 100%);
 
   --action-start-from: #81c784;
-  --action-start-to: #66bb6a;
-  --action-start-border: #4caf50;
-  --action-stop-from: #ff8a80;
-  --action-stop-to: #ff5252;
-  --action-stop-border: #ef5350;
-  --action-restart-from: #9fa8da;
-  --action-restart-to: #7986cb;
-  --action-restart-border: #7986cb;
+  --action-start-to: #57a95f;
+  --action-start-border: #63bd72;
+  --action-start-highlight: #b9f5bf;
+  --action-start-shadow: rgba(53, 120, 67, 0.56);
+
+  --action-stop-from: #ff948b;
+  --action-stop-to: #ea5f5a;
+  --action-stop-border: #f3736d;
+  --action-stop-highlight: #ffc1bc;
+  --action-stop-shadow: rgba(138, 44, 39, 0.62);
+
+  --action-restart-from: #a9b3ee;
+  --action-restart-to: #7f8ed9;
+  --action-restart-border: #8e9ce8;
+  --action-restart-highlight: #d0d7ff;
+  --action-restart-shadow: rgba(62, 76, 149, 0.62);
+
+  --action-download-from: #76aef9;
+  --action-download-to: #4f82d6;
+  --action-download-border: #6799ec;
+  --action-download-highlight: #c2deff;
+  --action-download-shadow: rgba(41, 71, 130, 0.64);
+
+  --action-neutral-from: #8f9eb9;
+  --action-neutral-to: #7385a6;
+  --action-neutral-border: #7f95b9;
+  --action-neutral-highlight: #d0ddf2;
+  --action-neutral-shadow: rgba(40, 54, 87, 0.58);
 }
